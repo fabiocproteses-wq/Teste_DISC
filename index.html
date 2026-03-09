@@ -756,64 +756,6 @@ async function showAdmin() {
     const dom = getDominant(r.scores);
     counts[dom]++;
   });
-
-  document.getElementById('adminStats').innerHTML = `
-    <div class="stat-card stat-total">
-      <div class="stat-val">${results.length}</div>
-      <div class="stat-label">Total de Avaliações</div>
-    </div>
-    <div class="stat-card stat-D">
-      <div class="stat-val">${counts.D}</div>
-      <div class="stat-label">🔴 Dominância (D)</div>
-    </div>
-    <div class="stat-card stat-I">
-      <div class="stat-val">${counts.I}</div>
-      <div class="stat-label">🟡 Influência (I)</div>
-    </div>
-    <div class="stat-card stat-S">
-      <div class="stat-val">${counts.S}</div>
-      <div class="stat-label">🟢 Estabilidade (S)</div>
-    </div>
-    <div class="stat-card stat-C">
-      <div class="stat-val">${counts.C}</div>
-      <div class="stat-label">🔵 Conformidade (C)</div>
-    </div>`;
-
-  const tbody = document.getElementById('resultsBody');
-  const noRes = document.getElementById('noResults');
-
-  if (results.length === 0) {
-    tbody.innerHTML = '';
-    noRes.classList.remove('hidden');
-    return;
-  }
-
-  noRes.classList.add('hidden');
-
-  tbody.innerHTML = results.map((r, idx) => {
-    const dom = getDominant(r.scores);
-    const p = PROFILES[dom];
-
-    return `<tr onclick="showDetail('${r.id}')">
-      <td>${idx + 1}</td>
-      <td><strong>${r.name}</strong></td>
-      <td>${r.date}</td>
-      <td><span class="score-badge score-D">${r.scores.D}</span></td>
-      <td><span class="score-badge score-I">${r.scores.I}</span></td>
-      <td><span class="score-badge score-S">${r.scores.S}</span></td>
-      <td><span class="score-badge score-C">${r.scores.C}</span></td>
-      <td><span class="dominant-badge dom-${dom}">${p.emoji} ${dom} — ${p.name}</span></td>
-      <td><button class="delete-btn" onclick="event.stopPropagation();deleteResult('${r.id}')">🗑 Excluir</button></td>
-    </tr>`;
-  }).join('');
-}
-
-  // Stats
-  const counts = { D:0, I:0, S:0, C:0 };
-  results.forEach(r => {
-    const dom = getDominant(r.scores);
-    counts[dom]++;
-  });
   document.getElementById('adminStats').innerHTML = `
     <div class="stat-card stat-total">
       <div class="stat-val">${results.length}</div>
@@ -863,10 +805,7 @@ async function showAdmin() {
 }
 
 function deleteResult(id) {
-  if (!confirm('Deseja excluir este resultado?')) return;
-  let results = getResults().filter(r => String(r.id) !== String(id));
-  localStorage.setItem('disc_results', JSON.stringify(results));
-  showAdmin();
+  alert("Exclusão ainda não está habilitada para resultados do Google Sheets.");
 }
 
 function getDominant(scores) {
@@ -876,8 +815,8 @@ function getDominant(scores) {
 // ===============================================================
 // DETAIL VIEW
 // ===============================================================
-function showDetail(id) {
-  const results = getResults();
+async function showDetail(id) {
+  const results = await getResults();
   const r = results.find(x => String(x.id) === String(id));
   if (!r) return;
 
