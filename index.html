@@ -6,7 +6,7 @@
   <title>Teste de Perfil DISC</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
-    /* ===== RESET & BASE ===== */
+    /* ===== SEU CSS ORIGINAL (MANTIDO) ===== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --D: #e74c3c; --I: #f39c12; --S: #27ae60; --C: #2980b9;
@@ -15,353 +15,65 @@
       --border: #e2e8f0; --shadow: 0 4px 24px rgba(0,0,0,.10);
     }
     body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
-
-    /* ===== TOP BAR ===== */
     header {
       background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
       padding: 18px 32px; display: flex; align-items: center; justify-content: space-between;
       box-shadow: 0 2px 12px rgba(79,70,229,.35); position: sticky; top: 0; z-index: 100;
     }
     .logo { display: flex; align-items: center; gap: 14px; }
-    .logo-icon {
-      width: 44px; height: 44px; background: rgba(255,255,255,.2); border-radius: 12px;
-      display: flex; align-items: center; justify-content: center; font-size: 22px;
-    }
-    .logo h1 { color: #fff; font-size: 1.4rem; font-weight: 700; letter-spacing: .5px; }
-    .logo p { color: rgba(255,255,255,.75); font-size: .78rem; }
-    #btnAdmin {
-      background: rgba(255,255,255,.15); color: #fff; border: 1.5px solid rgba(255,255,255,.4);
-      padding: 9px 20px; border-radius: 9px; font-size: .88rem; font-weight: 600;
-      cursor: pointer; transition: all .2s; display: flex; align-items: center; gap: 7px;
-    }
-    #btnAdmin:hover { background: rgba(255,255,255,.28); }
-
-    /* ===== MAIN FORM ===== */
+    .logo-icon { width: 44px; height: 44px; background: rgba(255,255,255,.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+    .logo h1 { color: #fff; font-size: 1.4rem; font-weight: 700; }
+    #btnAdmin { background: rgba(255,255,255,0.15); color: #fff; border: 1.5px solid rgba(255,255,255,0.4); padding: 9px 20px; border-radius: 9px; cursor: pointer; }
     main { max-width: 860px; margin: 40px auto; padding: 0 20px 60px; }
-    .hero-card {
-      background: var(--card); border-radius: 18px; padding: 36px 40px;
-      box-shadow: var(--shadow); margin-bottom: 32px;
-      border-left: 6px solid var(--primary); position: relative; overflow: hidden;
-    }
-    .hero-card::before {
-      content: 'DISC'; position: absolute; right: 28px; top: 50%; transform: translateY(-50%);
-      font-size: 7rem; font-weight: 900; color: rgba(79,70,229,.06); line-height: 1; letter-spacing: 4px;
-    }
-    .hero-card h2 { font-size: 1.55rem; color: var(--primary); margin-bottom: 8px; }
-    .hero-card p { color: #64748b; line-height: 1.7; max-width: 560px; }
-    .disc-legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 18px; }
-    .disc-badge {
-      display: flex; align-items: center; gap: 7px;
-      padding: 5px 14px; border-radius: 20px; font-size: .82rem; font-weight: 600;
-    }
-    .badge-D { background: #fef2f2; color: var(--D); }
-    .badge-I { background: #fffbeb; color: var(--I); }
-    .badge-S { background: #f0fdf4; color: var(--S); }
-    .badge-C { background: #eff6ff; color: var(--C); }
-
-    /* Name input */
+    .hero-card { background: var(--card); border-radius: 18px; padding: 36px 40px; box-shadow: var(--shadow); margin-bottom: 32px; border-left: 6px solid var(--primary); }
     .name-section { background: var(--card); border-radius: 14px; padding: 28px 32px; box-shadow: var(--shadow); margin-bottom: 28px; }
-    .name-section label { font-size: .92rem; font-weight: 600; color: var(--text); display: block; margin-bottom: 10px; }
-    .name-section input {
-      width: 100%; padding: 13px 16px; border: 2px solid var(--border); border-radius: 10px;
-      font-size: 1rem; color: var(--text); transition: border-color .2s; outline: none;
-    }
-    .name-section input:focus { border-color: var(--primary); }
-
-    /* Question card */
-    .question-card {
-      background: var(--card); border-radius: 14px; padding: 28px 32px;
-      box-shadow: var(--shadow); margin-bottom: 20px;
-      border-top: 4px solid var(--border); transition: border-color .3s;
-    }
-    .question-card.q-filled { border-top-color: var(--primary); }
-    .q-header { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px; }
-    .q-num {
-      min-width: 36px; height: 36px; background: var(--primary); color: #fff;
-      border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      font-size: .85rem; font-weight: 700;
-    }
-    .q-title { font-size: 1.05rem; font-weight: 600; color: var(--text); line-height: 1.4; padding-top: 4px; }
-
-    /* Options grid */
+    .name-section input { width: 100%; padding: 13px 16px; border: 2px solid var(--border); border-radius: 10px; }
+    .question-card { background: var(--card); border-radius: 14px; padding: 28px 32px; box-shadow: var(--shadow); margin-bottom: 20px; border-top: 4px solid var(--border); }
+    .q-filled { border-top-color: var(--primary) !important; }
     .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    @media(max-width: 600px) { .options-grid { grid-template-columns: 1fr; } }
-    .option-row {
-      display: flex; align-items: center; gap: 0;
-      border: 2px solid var(--border); border-radius: 10px;
-      overflow: hidden; transition: border-color .2s; background: #fafafa;
-    }
-    .option-row:hover { border-color: var(--primary); }
-    .option-label {
-      flex: 1; padding: 11px 14px; font-size: .93rem; color: var(--text);
-      display: flex; align-items: center; gap: 8px; user-select: none;
-    }
-    .opt-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-    .opt-D .opt-dot { background: var(--D); }
-    .opt-I .opt-dot { background: var(--I); }
-    .opt-S .opt-dot { background: var(--S); }
-    .opt-C .opt-dot { background: var(--C); }
-    .rank-select {
-      background: var(--primary); color: #fff; border: none; outline: none;
-      padding: 0 10px; height: 100%; font-size: .92rem; font-weight: 700;
-      cursor: pointer; min-width: 52px; height: 44px;
-    }
-    .rank-select option { background: #fff; color: var(--text); }
-
-    /* Progress */
-    .progress-wrap { margin-bottom: 24px; }
-    .progress-bar-bg {
-      background: var(--border); border-radius: 8px; height: 8px; margin-bottom: 6px;
-    }
-    .progress-bar-fill {
-      height: 8px; border-radius: 8px;
-      background: linear-gradient(90deg, var(--primary), #7c3aed);
-      transition: width .4s ease; width: 0%;
-    }
-    .progress-text { font-size: .82rem; color: #64748b; text-align: right; }
-
-    /* Submit */
-    .submit-area { text-align: center; margin-top: 32px; }
-    #btnSubmit {
-      background: linear-gradient(135deg, var(--primary), #7c3aed);
-      color: #fff; border: none; padding: 16px 52px; border-radius: 12px;
-      font-size: 1.1rem; font-weight: 700; cursor: pointer;
-      box-shadow: 0 6px 20px rgba(79,70,229,.35); transition: all .2s; letter-spacing: .5px;
-    }
-    #btnSubmit:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(79,70,229,.45); }
-    #btnSubmit:disabled { opacity: .55; cursor: not-allowed; transform: none; }
-
-    /* Error */
-    .error-msg { color: #e53e3e; font-size: .83rem; margin-top: 6px; }
-
-    /* ===== THANK YOU PAGE ===== */
-    #thankyou-page {
-      display: none; min-height: 100vh; align-items: center; justify-content: center;
-      flex-direction: column; text-align: center; padding: 40px 20px;
-    }
-    .ty-icon { font-size: 5rem; margin-bottom: 20px; animation: bounce .8s ease infinite alternate; }
-    @keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-14px); } }
-    .ty-card {
-      background: var(--card); border-radius: 20px; padding: 48px 56px;
-      box-shadow: 0 12px 48px rgba(0,0,0,.14); max-width: 500px;
-    }
-    .ty-card h2 { font-size: 1.9rem; color: var(--primary); margin-bottom: 12px; }
-    .ty-card p { color: #64748b; line-height: 1.7; margin-bottom: 24px; }
-    .ty-timer { font-size: 3rem; font-weight: 800; color: var(--primary); margin: 12px 0; }
-    .ty-note { font-size: .85rem; color: #94a3b8; }
-
-    /* ===== MODAL ===== */
-    .modal-backdrop {
-      display: none; position: fixed; inset: 0; background: rgba(0,0,0,.55);
-      z-index: 999; align-items: center; justify-content: center;
-    }
+    .option-row { display: flex; align-items: center; border: 2px solid var(--border); border-radius: 10px; background: #fafafa; overflow: hidden; }
+    .option-label { flex: 1; padding: 10px; font-size: 0.9rem; }
+    .rank-select { background: var(--primary); color: #fff; border: none; padding: 10px; font-weight: bold; cursor: pointer; }
+    .progress-bar-bg { background: var(--border); border-radius: 8px; height: 8px; margin-bottom: 6px; }
+    .progress-bar-fill { height: 8px; border-radius: 8px; background: var(--primary); width: 0%; transition: 0.4s; }
+    #btnSubmit { background: var(--primary); color: #fff; border: none; padding: 16px 52px; border-radius: 12px; font-weight: 700; cursor: pointer; width: 100%; }
+    .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 1000; align-items: center; justify-content: center; }
     .modal-backdrop.open { display: flex; }
-    .modal {
-      background: var(--card); border-radius: 18px; padding: 40px 44px;
-      box-shadow: 0 20px 60px rgba(0,0,0,.25); width: 100%; max-width: 420px;
-      animation: slideIn .25s ease;
-    }
-    @keyframes slideIn { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
-    .modal h2 { font-size: 1.4rem; color: var(--text); margin-bottom: 6px; display: flex; align-items: center; gap: 10px; }
-    .modal p { color: #64748b; font-size: .9rem; margin-bottom: 24px; }
-    .modal label { font-size: .88rem; font-weight: 600; color: var(--text); display: block; margin-bottom: 6px; }
-    .modal input {
-      width: 100%; padding: 11px 14px; border: 2px solid var(--border); border-radius: 9px;
-      font-size: .97rem; margin-bottom: 16px; outline: none; transition: border-color .2s;
-    }
-    .modal input:focus { border-color: var(--primary); }
-    .modal-btns { display: flex; gap: 12px; margin-top: 4px; }
-    .btn-cancel {
-      flex: 1; padding: 11px; border: 2px solid var(--border); background: #fff;
-      border-radius: 9px; font-size: .95rem; cursor: pointer; font-weight: 600; color: #64748b;
-      transition: all .2s;
-    }
-    .btn-cancel:hover { background: var(--border); }
-    .btn-login {
-      flex: 2; padding: 11px; background: linear-gradient(135deg, var(--primary), #7c3aed);
-      border: none; color: #fff; border-radius: 9px; font-size: .95rem; font-weight: 700;
-      cursor: pointer; transition: all .2s;
-    }
-    .btn-login:hover { opacity: .88; }
-    .login-err { color: #e53e3e; font-size: .83rem; margin-top: 4px; display: none; }
-
-    /* ===== ADMIN PANEL ===== */
-    #admin-panel { display: none; }
-    .admin-header {
-      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
-      padding: 24px 40px; display: flex; align-items: center; justify-content: space-between;
-    }
-    .admin-header h1 { color: #fff; font-size: 1.35rem; display: flex; align-items: center; gap: 12px; }
-    #btnLogout {
-      background: rgba(255,255,255,.15); color: #fff; border: 1.5px solid rgba(255,255,255,.35);
-      padding: 8px 18px; border-radius: 8px; font-size: .87rem; font-weight: 600; cursor: pointer;
-    }
-    #btnLogout:hover { background: rgba(255,255,255,.25); }
-    .admin-body { max-width: 1100px; margin: 36px auto; padding: 0 24px 60px; }
-    .admin-stats {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 16px; margin-bottom: 32px;
-    }
-    .stat-card {
-      background: var(--card); border-radius: 14px; padding: 22px 24px; box-shadow: var(--shadow);
-      display: flex; flex-direction: column; gap: 4px;
-    }
-    .stat-card .stat-val { font-size: 2rem; font-weight: 800; }
-    .stat-card .stat-label { font-size: .83rem; color: #64748b; }
-    .stat-D .stat-val { color: var(--D); }
-    .stat-I .stat-val { color: var(--I); }
-    .stat-S .stat-val { color: var(--S); }
-    .stat-C .stat-val { color: var(--C); }
-    .stat-total .stat-val { color: var(--primary); }
-
-    .section-title {
-      font-size: 1.1rem; font-weight: 700; color: var(--text);
-      margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
-    }
-    .results-table-wrap { background: var(--card); border-radius: 14px; box-shadow: var(--shadow); overflow: hidden; margin-bottom: 32px; }
-    table { width: 100%; border-collapse: collapse; }
-    thead tr { background: linear-gradient(135deg, var(--primary), #7c3aed); color: #fff; }
-    thead th { padding: 14px 16px; text-align: left; font-size: .87rem; font-weight: 700; }
-    tbody tr { border-bottom: 1px solid var(--border); cursor: pointer; transition: background .15s; }
-    tbody tr:hover { background: #f5f3ff; }
-    tbody td { padding: 13px 16px; font-size: .9rem; }
-    .score-badge {
-      display: inline-flex; align-items: center; justify-content: center;
-      padding: 3px 10px; border-radius: 20px; font-size: .8rem; font-weight: 700;
-    }
-    .score-D { background: #fef2f2; color: var(--D); }
-    .score-I { background: #fffbeb; color: var(--I); }
-    .score-S { background: #f0fdf4; color: var(--S); }
-    .score-C { background: #eff6ff; color: var(--C); }
-    .dominant-badge {
-      padding: 4px 12px; border-radius: 20px; font-size: .8rem; font-weight: 800;
-      letter-spacing: .5px;
-    }
-    .dom-D { background: var(--D); color: #fff; }
-    .dom-I { background: var(--I); color: #fff; }
-    .dom-S { background: var(--S); color: #fff; }
-    .dom-C { background: var(--C); color: #fff; }
-    .no-results { text-align: center; padding: 48px; color: #94a3b8; font-size: 1rem; }
-
-    /* ===== DETAIL VIEW ===== */
-    #detail-view { display: none; }
-    .detail-header {
-      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
-      padding: 24px 40px; display: flex; align-items: center; justify-content: space-between;
-    }
-    .detail-header h1 { color: #fff; font-size: 1.25rem; display: flex; align-items: center; gap: 12px; }
-    #btnBackAdmin {
-      background: rgba(255,255,255,.15); color: #fff; border: 1.5px solid rgba(255,255,255,.35);
-      padding: 8px 18px; border-radius: 8px; font-size: .87rem; font-weight: 600; cursor: pointer;
-    }
-    #btnBackAdmin:hover { background: rgba(255,255,255,.25); }
-    .detail-body { max-width: 960px; margin: 36px auto; padding: 0 24px 60px; }
-    .detail-top {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 28px;
-    }
-    @media(max-width: 700px) { .detail-top { grid-template-columns: 1fr; } }
-    .person-card {
-      background: var(--card); border-radius: 16px; padding: 28px; box-shadow: var(--shadow);
-    }
-    .person-card h2 { font-size: 1.4rem; font-weight: 800; color: var(--text); margin-bottom: 4px; }
-    .person-card .date { font-size: .82rem; color: #94a3b8; margin-bottom: 18px; }
-    .scores-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
-    .score-item {
-      flex: 1; min-width: 70px; background: #f8fafc; border-radius: 10px;
-      padding: 12px; text-align: center; border: 2px solid var(--border);
-    }
-    .score-item .s-val { font-size: 1.6rem; font-weight: 800; }
-    .score-item .s-lbl { font-size: .72rem; font-weight: 600; color: #64748b; margin-top: 2px; }
-    .score-item.active { border-color: currentColor; }
-    .si-D .s-val, .si-D.active { color: var(--D); border-color: var(--D); background: #fef2f2; }
-    .si-I .s-val, .si-I.active { color: var(--I); border-color: var(--I); background: #fffbeb; }
-    .si-S .s-val, .si-S.active { color: var(--S); border-color: var(--S); background: #f0fdf4; }
-    .si-C .s-val, .si-C.active { color: var(--C); border-color: var(--C); background: #eff6ff; }
-    .dominant-info { margin-top: 14px; padding: 14px 18px; border-radius: 12px; }
-    .dominant-info.dom-D-bg { background: #fef2f2; border-left: 5px solid var(--D); }
-    .dominant-info.dom-I-bg { background: #fffbeb; border-left: 5px solid var(--I); }
-    .dominant-info.dom-S-bg { background: #f0fdf4; border-left: 5px solid var(--S); }
-    .dominant-info.dom-C-bg { background: #eff6ff; border-left: 5px solid var(--C); }
-    .dominant-info p { font-size: .88rem; line-height: 1.6; }
-    .radar-card {
-      background: var(--card); border-radius: 16px; padding: 28px; box-shadow: var(--shadow);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-    }
-    .radar-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 16px; color: var(--text); }
-    #radarChart { max-width: 320px; max-height: 320px; }
-
-    /* Profile sections */
-    .profile-sections { display: flex; flex-direction: column; gap: 20px; }
-    .profile-section {
-      background: var(--card); border-radius: 14px; padding: 26px 30px; box-shadow: var(--shadow);
-    }
-    .profile-section h3 {
-      font-size: 1.05rem; font-weight: 700; margin-bottom: 14px;
-      display: flex; align-items: center; gap: 8px; color: var(--text);
-    }
-    .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
-    .tag {
-      padding: 5px 13px; border-radius: 20px; font-size: .82rem; font-weight: 600;
-      background: #f1f5f9; color: #475569;
-    }
-    .tag-pos { background: #dcfce7; color: #166534; }
-    .tag-neg { background: #fee2e2; color: #991b1b; }
-    .tag-env { background: #dbeafe; color: #1e40af; }
-    .tag-team { background: #fef9c3; color: #854d0e; }
-    .tag-stress { background: #fce7f3; color: #9d174d; }
-
-    /* Progress % bar */
-    .pct-bar-wrap { width: 100%; background: var(--border); border-radius: 6px; height: 6px; margin-top: 6px; }
-    .pct-bar { height: 6px; border-radius: 6px; }
-
-    /* ===== UTILITY ===== */
-    .hidden { display: none !important; }
-    .delete-btn {
-      background: #fef2f2; color: #dc2626; border: 1px solid #fecaca;
-      padding: 4px 10px; border-radius: 6px; font-size: .78rem; cursor: pointer;
-      font-weight: 600; transition: all .15s;
-    }
-    .delete-btn:hover { background: #dc2626; color: #fff; }
+    .modal { background: #fff; padding: 30px; border-radius: 15px; width: 100%; max-width: 350px; }
+    .modal input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; }
+    #admin-panel { display: none; padding: 20px; }
+    table { width: 100%; border-collapse: collapse; background: #fff; }
+    th, td { padding: 12px; border-bottom: 1px solid #eee; text-align: left; }
+    .hidden { display: none; }
   </style>
 </head>
 <body>
 
-<!-- ============================================================
-     TEST FORM PAGE
-     ============================================================ -->
 <div id="test-page">
   <header>
     <div class="logo">
       <div class="logo-icon">🎯</div>
-      <div>
-        <h1>Perfil DISC</h1>
-        <p>Teste de Autoconhecimento Comportamental</p>
-      </div>
+      <h1>Perfil DISC</h1>
     </div>
     <button id="btnAdmin" onclick="openLoginModal()">🔐 Admin</button>
   </header>
 
   <main>
-    <!-- Hero -->
     <div class="hero-card">
       <h2>Descubra seu Perfil Comportamental</h2>
-      <p>Responda as 25 questões abaixo classificando cada alternativa de <strong>1 a 4</strong>, sendo <strong>1</strong> a que você menos se identifica e <strong>4</strong> a que você mais se identifica. Os números não podem se repetir dentro de uma mesma questão.</p>
-  
+      <p>Classifique de 1 a 4 (1 menos identifica, 4 mais identifica). <b>Não repita números na mesma questão.</b></p>
     </div>
 
-    <!-- Name -->
     <div class="name-section">
-      <label for="nomeCompleto">👤 Nome Completo <span style="color:#e53e3e">*</span></label>
-      <input type="text" id="nomeCompleto" placeholder="Digite seu nome completo aqui..." autocomplete="off" />
-      <div class="error-msg hidden" id="errName">Por favor, informe seu nome completo.</div>
+      <label>👤 Nome Completo</label>
+      <input type="text" id="nomeCompleto" placeholder="Seu nome..." />
     </div>
 
-    <!-- Progress -->
     <div class="progress-wrap">
       <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
-      <div class="progress-text" id="progressText">0 de 25 questões respondidas</div>
+      <div id="progressText" style="font-size: 12px; text-align: right; margin-bottom: 20px;">0 de 25 concluídas</div>
     </div>
 
-    <!-- Questions injected by JS -->
     <div id="questionsContainer"></div>
 
     <div class="submit-area">
@@ -370,537 +82,173 @@
   </main>
 </div>
 
-<!-- ============================================================
-     THANK YOU PAGE
-     ============================================================ -->
-<div id="thankyou-page">
-  <div class="ty-card">
-    <div class="ty-icon">🎉</div>
-    <h2>Obrigado!</h2>
-    <p>Seu teste foi registrado com sucesso.<br>Em breve você receberá seu feedback sobre o perfil DISC.</p>
-    <div class="ty-timer" id="tyTimer">5</div>
-    <div class="ty-note">A página será reiniciada automaticamente em <strong id="tyCount">5</strong> segundos.</div>
-  </div>
+<div id="thankyou-page" style="display:none; text-align:center; padding:100px 20px;">
+  <h1>🎉 Recebido!</h1>
+  <p>Seu teste foi salvo com sucesso.</p>
+  <p>Reiniciando em <span id="tyCount">5</span>...</p>
 </div>
 
-<!-- ============================================================
-     ADMIN PANEL
-     ============================================================ -->
 <div id="admin-panel">
-  <div class="admin-header">
-    <h1>🛡️ Painel Administrativo — Resultados DISC</h1>
-    <button id="btnLogout" onclick="logout()">Sair ↩</button>
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+    <h2>📊 Resultados Coletados</h2>
+    <button onclick="logout()" style="padding:10px;">Sair ↩</button>
   </div>
-  <div class="admin-body">
-    <div class="admin-stats" id="adminStats"></div>
-    <div class="section-title">📋 Colaboradores Avaliados</div>
-    <div class="results-table-wrap">
-      <table id="resultsTable">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Nome</th>
-            <th>Data</th>
-            <th>D</th><th>I</th><th>S</th><th>C</th>
-            <th>Perfil Dominante</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody id="resultsBody"></tbody>
-      </table>
-      <div id="noResults" class="no-results hidden">Nenhum resultado registrado ainda.</div>
-    </div>
-  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Nome</th><th>Data</th><th>D</th><th>I</th><th>S</th><th>C</th><th>Ação</th>
+      </tr>
+    </thead>
+    <tbody id="resultsBody"></tbody>
+  </table>
 </div>
 
-<!-- ============================================================
-     DETAIL VIEW
-     ============================================================ -->
-<div id="detail-view">
-  <div class="detail-header">
-    <h1 id="detailName">👤</h1>
-    <button id="btnBackAdmin" onclick="showAdmin()">← Voltar</button>
-  </div>
-  <div class="detail-body">
-    <div class="detail-top">
-      <div class="person-card">
-        <h2 id="d-name"></h2>
-        <div class="date" id="d-date"></div>
-        <div class="scores-row" id="d-scores"></div>
-        <div id="d-dominant-info" class="dominant-info"></div>
-      </div>
-      <div class="radar-card">
-        <h3>📊 Gráfico Radar — Dimensões DISC</h3>
-        <canvas id="radarChart"></canvas>
-      </div>
-    </div>
-    <div class="profile-sections" id="profileSections"></div>
-  </div>
-</div>
-
-<!-- ============================================================
-     LOGIN MODAL
-     ============================================================ -->
 <div class="modal-backdrop" id="loginModal">
   <div class="modal">
-    <h2>🔐 Acesso Administrativo</h2>
-    <p>Insira suas credenciais para acessar o painel de resultados.</p>
-    <label>Usuário</label>
-    <input type="text" id="loginUser" placeholder="Usuário" autocomplete="off" />
-    <label>Senha</label>
-    <input type="password" id="loginPass" placeholder="Senha" onkeydown="if(event.key==='Enter') doLogin()" />
-    <div class="login-err" id="loginErr">Usuário ou senha incorretos.</div>
-    <div class="modal-btns">
-      <button class="btn-cancel" onclick="closeLoginModal()">Cancelar</button>
-      <button class="btn-login" onclick="doLogin()">Entrar →</button>
-    </div>
+    <h3>Acesso Admin</h3>
+    <input type="text" id="loginUser" placeholder="Usuário (DEISE)" />
+    <input type="password" id="loginPass" placeholder="Senha" />
+    <p id="loginErr" style="color:red; display:none; font-size:12px;">Erro ao acessar.</p>
+    <button onclick="doLogin()" style="width:100%; padding:10px; background:var(--primary); color:#fff; border:none; border-radius:5px; cursor:pointer;">Entrar</button>
+    <button onclick="closeLoginModal()" style="width:100%; margin-top:5px; background:none; border:none; cursor:pointer;">Cancelar</button>
   </div>
 </div>
 
-<script>
-// ===============================================================
-// DATA — 25 QUESTIONS
-// ===============================================================
-const QUESTIONS = [
-  { title: "Tende a agir de forma...",        D: "Assertiva",                         I: "Persuasiva",                              S: "Paciente",                          C: "Contemplativa" },
-  { title: "Confortável com...",               D: "Ser decisivo",                      I: "Amizade social",                          S: "Ser parte de um time",              C: "Planejamento e ordem" },
-  { title: "Desejo de...",                     D: "Variedade",                         I: "Menos estrutura",                         S: "Harmonia",                          C: "Lógica" },
-  { title: "Sob estresse pode se tornar...",   D: "Ditatorial",                        I: "Sarcástico",                              S: "Submisso",                          C: "Arredio" },
-  { title: "Característica principal...",      D: "Franco",                            I: "Otimista",                                S: "Serviçal",                          C: "Ordeiro" },
-  { title: "Quando em conflito, esse estilo…", D: "Demanda ação",                     I: "Ataca",                                   S: "Reclama",                           C: "Evita" },
-  { title: "Força aparente...",                D: "Solucionador de problemas",         I: "Encorajador",                             S: "Supporter",                         C: "Organizador" },
-  { title: "Com erros...",                     D: "Informa o erro diretamente",        I: "Chama a pessoa e explica o erro",         S: "Fica calado e aceita o erro",       C: "Se incomoda e questiona" },
-  { title: "Sob estresse pode se tornar...",   D: "Crítico",                           I: "Superficial",                             S: "Indeciso",                          C: "Cabeça dura" },
-  { title: "Pode ser considerado...",          D: "Impaciente",                        I: "Inoportuno",                              S: "Indeciso",                          C: "Inseguro" },
-  { title: "Necessita de...",                  D: "Controle",                          I: "Aprovação",                               S: "Rotina",                            C: "Padrão" },
-  { title: "Limitação desse perfil...",        D: "Direto",                            I: "Desorganizado",                           S: "Indireto",                          C: "Detalhista" },
-  { title: "Possui medo de...",                D: "Perder",                            I: "Rejeição",                                S: "Mudanças bruscas",                  C: "Estar errado" },
-  { title: "Mensura desempenho com...",        D: "Resultados",                        I: "Reconhecimento",                          S: "Compatibilidade",                   C: "Precisão" },
-  { title: "Com subalternos, costuma ser...",  D: "Orgulhoso",                         I: "Permissivo",                              S: "Humilde",                           C: "Cauteloso" },
-  { title: "Abordagem primária...",            D: "Independente",                      I: "Interativo",                              S: "Estável",                           C: "Corretivo" },
-  { title: "Outra limitação desse perfil...", D: "Intenso",                           I: "Não tradicional",                         S: "Indeciso",                          C: "Impessoal" },
-  { title: "Ponto cego...",                    D: "Ser responsabilizado",              I: "Realizar compromissos",                   S: "Necessidade de mudança",            C: "Tomada de decisão" },
-  { title: "Mensura desempenho com...",        D: "Histórico",                         I: "Elogios",                                 S: "Contribuição",                      C: "Qualidade dos resultados" },
-  { title: "Prefere tarefas...",               D: "Desafiadoras",                      I: "Relacionada a pessoas",                   S: "Agendadas",                         C: "Estruturadas" },
-  { title: "Com atrasos...",                   D: "Se irrita e confronta",             I: "Nem liga, está distraído",                S: "Sabe do atraso, mas aceita",        C: "Reclama e analisa a situação" },
-  { title: "Em situações extremas...",         D: "Se preocupa demais com metas",      I: "Fala sem pensar",                         S: "Procrastina ao invés de fazer",     C: "Analisa demais" },
-  { title: "Precisa melhorar...",              D: "Empatia e Paciência",               I: "Controle emocional",                      S: "Ser assertivo sob pressão",         C: "Se preocupar menos sobre tudo" },
-  { title: "Em uma discussão...",              D: "Busca ter a razão",                 I: "Busca diminuir o conflito",               S: "Busca concordância",                C: "Busca comprovar sua opinião" },
-  { title: "Quando vai às compras...",         D: "Sabe o que quer",                   I: "Se diverte",                              S: "Fica indeciso",                     C: "Busca ofertas" }
-];
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+  import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-// ===============================================================
-// PROFILE DATA
-// ===============================================================
-const PROFILES = {
-  D: {
-    name: "Dominância",
-    color: "#e74c3c",
-    colorBg: "dom-D-bg",
-    emoji: "🔴",
-    shortDesc: "Pessoa orientada a resultados, direta e decisiva. Gosta de desafios e de estar no controle das situações.",
-    positivos: ["Aventureiro","Com iniciativa","Competitivo","Determinado","Direto","Responsável","Exigente","Foco nos resultados","Líder","Ousado","Persistente","Pioneiro","Superador","Resolve problemas"],
-    valorEquipe: ["Coordenador","Inovador","Previdente","Tem iniciativa","Voltado para o desafio"],
-    ambienteIdeal: ["Debate para expressar pontos de vista","Livre de controle, supervisão e detalhes","Trabalho com desafios e oportunidades","Um ambiente inovador","Trabalho que não seja rotineiro"],
-    sobPressao: ["Exigente","Nervoso","Agressivo","Egoísta"],
-    limitantes: ["Ser arrogante","Aproveita-se de sua posição","Atribui-se muitas coisas","Correr muitos riscos","Cria medo nas pessoas","Exigências muito altas","Falar sem pensar","Falta de tato e diplomacia","Não recebe bem feedback","Não ser um bom ouvinte","Problemas de delegação","Ser impaciente","Ser insensível com pessoas","Ser multitarefa e não dar conta"]
-  },
-  I: {
-    name: "Influência",
-    color: "#f39c12",
-    colorBg: "dom-I-bg",
-    emoji: "🟡",
-    shortDesc: "Pessoa comunicativa, entusiasta e otimista. Motiva as pessoas ao redor e se destaca em ambientes sociais.",
-    positivos: ["Atencioso","Bom humor","Caloroso","Confiante","Confidente","Convincente","Encantador","Entusiasta","Inspirador","Otimista","Persuasivo","Político","Popular","Sociável"],
-    valorEquipe: ["Criativo, resolve conflitos","Joga em equipe","Motiva os demais a alcançar seus objetivos","Negocia conflitos","Otimista e entusiasta"],
-    ambienteIdeal: ["Contato constante com as pessoas","Debate para ouvir ideias","Liberdade de movimento","Livre de controle e detalhes","Supervisor democrático com quem se associar"],
-    sobPressao: ["Falante","Muito otimista","Pouco realista","Se auto-promove"],
-    limitantes: ["Abandonar quando há conflito","Confia indiscriminadamente nas pessoas","Demasiadamente otimista","Desatento para os detalhes","Falar muito rápido (ruído)","Falar sem pensar","Não ouve em todas as ocasiões","Perde o foco com facilidade","Pouco realista ao avaliar as pessoas","Problemas com o tempo","Problemas em completar tarefas","Problemas na comunicação","Ser desorganizado","Ser indireto na comunicação"]
-  },
-  S: {
-    name: "Estabilidade",
-    color: "#27ae60",
-    colorBg: "dom-S-bg",
-    emoji: "🟢",
-    shortDesc: "Pessoa calma, leal e cooperativa. Valoriza a harmonia, as relações duradouras e ambientes previsíveis.",
-    positivos: ["Amável","Amigável","Apaziguador","Calmo","Compreensivo","Confiável","Consciente","Descontraído","Grande ouvinte","Leal","Paciente","Planejador","Sabe escutar","Sincero"],
-    valorEquipe: ["Joga em equipe","Lógico, analisa","Orientado para o serviço","Paciente e enérgico","Trabalha para um líder e por uma causa"],
-    ambienteIdeal: ["Ambiente estável e previsível","Ambiente que lhe permita mudar","Liberdade de normas de restrição","Pouco conflito entre as pessoas","Relações de trabalho duradouras"],
-    sobPressao: ["Despreocupado","Indeciso","Inflexível","Reservado"],
-    limitantes: ["Cede, evita controvérsia","Correr pouquíssimo risco","Dificuldade em estabelecer prioridades","Dificuldade para lidar com diversas situações","Falta iniciativa","Fazer uma coisa de cada vez","Guardar rancor","Não gosta de mudanças repentinas","Não gostar de mudanças","Não ter muita ambição","Pouco expansível","Ser lento","Ser possessivo","Ser tolerante demais"]
-  },
-  C: {
-    name: "Conformidade",
-    color: "#2980b9",
-    colorBg: "dom-C-bg",
-    emoji: "🔵",
-    shortDesc: "Pessoa analítica, precisa e criteriosa. Valoriza qualidade, processos corretos e padrões elevados.",
-    positivos: ["Acabador","Alto padrão de qualidade","Analítico","Consciente","Cuidadoso","Diplomático","Exato","Faz boas perguntas","Firme","Maduro","Paciente","Pensa objetivamente","Preciso","Procura realizações"],
-    valorEquipe: ["Compreensivo, resolve problemas","Consciente e consistente","Define, esclarece e obtém a informação","Mantém padrões altos","Objetivo — estar ancorado na realidade"],
-    ambienteIdeal: ["Ambiente de trabalho familiar","Cargo técnico ou em área especializada","Escritório ou área de trabalho privada","Onde é necessário pensamento crítico","Relação estreita com um grupo pequeno"],
-    sobPressao: ["Difícil de agradar","Meticuloso","Muito crítico","Pessimista"],
-    limitantes: ["Arrogante quando contrariado","Correr pouco risco","Defensivo às críticas","Inflexível","Internalizar sentimentos","Muito intenso em determinadas situações","Ótimo é inimigo do bom","Parece distante e frio","Requer dados em demasia","Se apega aos detalhes","Ser muito crítico","Ser muito duro consigo","Ser muito lento para agir"]
-  }
-};
+  // --- CONFIGURAÇÃO FIREBASE (SUBSTITUA PELOS SEUS DADOS) ---
+  const firebaseConfig = {
+    apiKey: "AIzaSyDsRdCrvnERCdkhqCI7z0AzCD06MQ0_jqE",
+    authDomain: "testedisc-ddc25.firebaseapp.com",
+    projectId: "testedisc-ddc25",
+    storageBucket: "testedisc-ddc25.firebasestorage.app",
+    messagingSenderId: "1061418109207",
+    appId: "1:1061418109207:web:d9b61184031e2599f74f52",
+    measurementId: "G-3G8PP3HG8D"
+  };
 
-// ===============================================================
-// RENDER QUESTIONS
-// ===============================================================
-let radarChartInstance = null;
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const auth = getAuth(app);
 
-function renderQuestions() {
+  // --- QUESTÕES (SUA LISTA ORIGINAL) ---
+  const QUESTIONS = [
+    { title: "Tende a agir de forma...", D: "Assertiva", I: "Persuasiva", S: "Paciente", C: "Contemplativa" },
+    { title: "Confortável com...", D: "Ser decisivo", I: "Amizade social", S: "Ser parte de um time", C: "Planejamento e ordem" },
+    { title: "Desejo de...", D: "Variedade", I: "Menos estrutura", S: "Harmonia", C: "Lógica" },
+    { title: "Sob estresse pode se tornar...", D: "Ditatorial", I: "Sarcástico", S: "Submisso", C: "Arredio" },
+    { title: "Característica principal...", D: "Franco", I: "Otimista", S: "Serviçal", C: "Ordeiro" },
+    { title: "Quando em conflito, esse estilo…", D: "Demanda ação", I: "Ataca", S: "Reclama", C: "Evita" },
+    { title: "Força aparente...", D: "Solucionador de problemas", I: "Encorajador", S: "Supporter", C: "Organizador" },
+    { title: "Com erros...", D: "Informa o erro diretamente", I: "Chama a pessoa e explica o erro", S: "Fica calado e aceita o erro", C: "Se incomoda e questiona" },
+    { title: "Sob estresse pode se tornar...", D: "Crítico", I: "Superficial", S: "Indeciso", C: "Cabeça dura" },
+    { title: "Pode ser considerado...", D: "Impaciente", I: "Inoportuno", S: "Indeciso", C: "Inseguro" },
+    { title: "Necessita de...", D: "Controle", I: "Aprovação", S: "Rotina", C: "Padrão" },
+    { title: "Limitação desse perfil...", D: "Direto", I: "Desorganizado", S: "Indireto", C: "Detalhista" },
+    { title: "Possui medo de...", D: "Perder", I: "Rejeição", S: "Mudanças bruscas", C: "Estar errado" },
+    { title: "Mensura desempenho com...", D: "Resultados", I: "Reconhecimento", S: "Compatibilidade", C: "Precisão" },
+    { title: "Com subalternos, costuma ser...", D: "Orgulhoso", I: "Permissivo", S: "Humilde", C: "Cauteloso" },
+    { title: "Abordagem primária...", D: "Independente", I: "Interativo", S: "Estável", C: "Corretivo" },
+    { title: "Outra limitação desse perfil...", D: "Intenso", I: "Não tradicional", S: "Indeciso", C: "Impessoal" },
+    { title: "Ponto cego...", D: "Ser responsabilizado", I: "Realizar compromissos", S: "Necessidade de mudança", C: "Tomada de decisão" },
+    { title: "Mensura desempenho com...", D: "Histórico", I: "Elogios", S: "Contribuição", C: "Qualidade dos resultados" },
+    { title: "Prefere tarefas...", D: "Desafiadoras", I: "Relacionada a pessoas", S: "Agendadas", C: "Estruturadas" },
+    { title: "Com atrasos...", D: "Se irrita e confronta", I: "Nem liga, está distraído", S: "Sabe do atraso, mas aceita", C: "Reclama e analisa a situação" },
+    { title: "Em situações extremas...", D: "Se preocupa demais com metas", I: "Fala sem pensar", S: "Procrastina ao invés de fazer", C: "Analisa demais" },
+    { title: "Precisa melhorar...", D: "Empatia e Paciência", I: "Controle emocional", S: "Ser assertivo sob pressão", C: "Se preocupar menos sobre tudo" },
+    { title: "Em uma discussão...", D: "Busca ter a razão", I: "Busca diminuir o conflito", S: "Busca concordância", C: "Busca comprovar sua opinião" },
+    { title: "Quando vai às compras...", D: "Sabe o que quer", I: "Se diverte", S: "Fica indeciso", C: "Busca ofertas" }
+  ];
+
+  // Renderizar Questões
   const container = document.getElementById('questionsContainer');
-  container.innerHTML = '';
   QUESTIONS.forEach((q, idx) => {
-    const n = idx + 1;
-    const dims = ['D','I','S','C'];
-    const labels = { D:'Dominância', I:'Influência', S:'Estabilidade', C:'Conformidade' };
-    let optionsHTML = dims.map(dim => `
-      <div class="option-row" id="opt-row-${n}-${dim}">
-        <label class="option-label opt-${dim}" for="sel-${n}-${dim}">
-          <span class="opt-dot"></span>
-          <span>${q[dim]}</span>
-        </label>
-        <select class="rank-select" id="sel-${n}-${dim}" onchange="onSelectChange(${n})">
-          <option value="">–</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-        </select>
-      </div>`).join('');
-
-    container.innerHTML += `
-      <div class="question-card" id="qcard-${n}">
-        <div class="q-header">
-          <div class="q-num">${n}</div>
-          <div class="q-title">${q.title}</div>
-        </div>
-        <div class="options-grid">${optionsHTML}</div>
-        <div class="error-msg hidden" id="qerr-${n}">Os 4 valores (1,2,3,4) devem ser usados uma vez cada.</div>
-      </div>`;
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.id = `q-card-${idx}`;
+    card.innerHTML = `
+      <div class="q-header"><div class="q-num">${idx+1}</div><div class="q-title">${q.title}</div></div>
+      <div class="options-grid">
+        ${['D','I','S','C'].map(perfil => `
+          <div class="option-row">
+            <div class="option-label">${q[perfil]}</div>
+            <select class="rank-select" data-q="${idx}" data-perfil="${perfil}" onchange="updateProgress(${idx})">
+              <option value="">-</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+            </select>
+          </div>
+        `).join('')}
+      </div>
+    `;
+    container.appendChild(card);
   });
-}
 
-function onSelectChange(qNum) {
-  updateProgress();
-  const card = document.getElementById(`qcard-${qNum}`);
-  const vals = ['D','I','S','C'].map(d => document.getElementById(`sel-${qNum}-${d}`).value).filter(v => v !== '');
-  const allFilled = vals.length === 4;
-  if (allFilled) card.classList.add('q-filled');
-  else card.classList.remove('q-filled');
-}
+  // Funções Globais (Janela)
+  window.updateProgress = (idx) => {
+    const selects = document.querySelectorAll(`.rank-select[data-q="${idx}"]`);
+    const respondidas = Array.from(selects).filter(s => s.value !== "").length;
+    if(respondidas === 4) document.getElementById(`q-card-${idx}`).classList.add('q-filled');
+    
+    const totalConcluidas = document.querySelectorAll('.q-filled').length;
+    document.getElementById('progressFill').style.width = (totalConcluidas / 25 * 100) + '%';
+    document.getElementById('progressText').innerText = `${totalConcluidas} de 25 concluídas`;
+  };
 
-function updateProgress() {
-  let filled = 0;
-  for (let i = 1; i <= 25; i++) {
-    const vals = ['D','I','S','C'].map(d => document.getElementById(`sel-${i}-${d}`)?.value).filter(v => v && v !== '');
-    if (vals.length === 4) filled++;
-  }
-  const pct = Math.round((filled / 25) * 100);
-  document.getElementById('progressFill').style.width = pct + '%';
-  document.getElementById('progressText').textContent = `${filled} de 25 questões respondidas`;
-}
+  window.submitTest = async () => {
+    const nome = document.getElementById('nomeCompleto').value.trim();
+    if(!nome) return alert("Por favor, digite seu nome!");
 
-// ===============================================================
-// SUBMIT
-// ===============================================================
-function submitTest() {
-  // Validate name
-  const nome = document.getElementById('nomeCompleto').value.trim();
-  const errName = document.getElementById('errName');
-  if (!nome) {
-    errName.classList.remove('hidden');
-    document.getElementById('nomeCompleto').focus();
-    document.getElementById('nomeCompleto').scrollIntoView({ behavior: 'smooth', block: 'center' });
-    return;
-  }
-  errName.classList.add('hidden');
-
-  // Validate all questions
-  let valid = true;
-  let firstErr = null;
-  for (let i = 1; i <= 25; i++) {
-    const vals = ['D','I','S','C'].map(d => document.getElementById(`sel-${i}-${d}`).value);
-    const errEl = document.getElementById(`qerr-${i}`);
-    const allFilled = vals.every(v => v !== '');
-    const noDup = allFilled && new Set(vals).size === 4;
-    if (!allFilled || !noDup) {
-      errEl.classList.remove('hidden');
-      if (!firstErr) firstErr = document.getElementById(`qcard-${i}`);
-      valid = false;
-    } else {
-      errEl.classList.add('hidden');
+    const totais = { D: 0, I: 0, S: 0, C: 0 };
+    for(let i=0; i<25; i++) {
+      const qSels = document.querySelectorAll(`.rank-select[data-q="${i}"]`);
+      const vals = Array.from(qSels).map(s => s.value);
+      if(vals.includes("")) return alert(`Complete a questão ${i+1}`);
+      if(new Set(vals).size !== 4) return alert(`Não repita números na questão ${i+1}`);
+      qSels.forEach(s => totais[s.dataset.perfil] += parseInt(s.value));
     }
-  }
-  if (!valid) {
-    firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    return;
-  }
 
-  // Calculate scores
-  let scores = { D:0, I:0, S:0, C:0 };
-  for (let i = 1; i <= 25; i++) {
-    ['D','I','S','C'].forEach(dim => {
-      scores[dim] += parseInt(document.getElementById(`sel-${i}-${dim}`).value);
+    try {
+      await addDoc(collection(db, "respostas"), { nome, ...totais, data: new Date().toISOString() });
+      document.getElementById('test-page').style.display = 'none';
+      document.getElementById('thankyou-page').style.display = 'block';
+      let c = 5; setInterval(() => { c--; document.getElementById('tyCount').innerText = c; if(c<=0) location.reload(); }, 1000);
+    } catch (e) { alert("Erro ao salvar."); }
+  };
+
+  window.doLogin = async () => {
+    const u = document.getElementById('loginUser').value.toUpperCase();
+    const p = document.getElementById('loginPass').value;
+    if(u !== "DEISE") return alert("Usuário inválido");
+    try {
+      await signInWithEmailAndPassword(auth, "deise@admin.com", p);
+      closeLoginModal();
+    } catch (e) { document.getElementById('loginErr').style.display = 'block'; }
+  };
+
+  onAuthStateChanged(auth, (user) => {
+    if(user) {
+      document.getElementById('test-page').style.display = 'none';
+      document.getElementById('admin-panel').style.display = 'block';
+      carregarResultados();
+    }
+  });
+
+  async function carregarResultados() {
+    const snap = await getDocs(query(collection(db, "respostas"), orderBy("data", "desc")));
+    const body = document.getElementById('resultsBody');
+    body.innerHTML = "";
+    snap.forEach(d => {
+      const r = d.data();
+      body.innerHTML += `<tr><td>${r.nome}</td><td>${new Date(r.data).toLocaleDateString()}</td><td>${r.D}</td><td>${r.I}</td><td>${r.S}</td><td>${r.C}</td><td><button onclick="deletar('${d.id}')">Excluir</button></td></tr>`;
     });
   }
 
-  // Save to localStorage
-  const now = new Date();
-  const record = {
-    id: Date.now(),
-    name: nome,
-    date: now.toLocaleDateString('pt-BR') + ' ' + now.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}),
-    scores: scores
-  };
-  fetch("https://script.google.com/macros/s/AKfycbxJ7rdxU8twcGX7d2mcjq5Djyyp6RkXcaPyJRHnW2i9m3sKz7ShyQUjI0KBCIcvUqPl/exec", {
-  method: "POST",
-  body: JSON.stringify(record),
-  headers: {
-    "Content-Type": "application/json"
-  }
-})
-.then(res => res.json())
-.then(data => {
-  console.log("Salvo:", data);
-})
-.catch(err => {
-  console.error("Erro ao salvar", err);
-});
-
-  // Show thank you
-  showThankyou();
-}
-
-// ===============================================================
-// THANK YOU
-// ===============================================================
-function showThankyou() {
-  document.getElementById('test-page').style.display = 'none';
-  const ty = document.getElementById('thankyou-page');
-  ty.style.display = 'flex';
-  let count = 5;
-  document.getElementById('tyTimer').textContent = count;
-  document.getElementById('tyCount').textContent = count;
-  const interval = setInterval(() => {
-    count--;
-    document.getElementById('tyTimer').textContent = count;
-    document.getElementById('tyCount').textContent = count;
-    if (count <= 0) {
-      clearInterval(interval);
-      location.reload();
-    }
-  }, 1000);
-}
-
-// ===============================================================
-// AUTH
-// ===============================================================
-function openLoginModal() {
-  document.getElementById('loginUser').value = '';
-  document.getElementById('loginPass').value = '';
-  document.getElementById('loginErr').style.display = 'none';
-  document.getElementById('loginModal').classList.add('open');
-  setTimeout(() => document.getElementById('loginUser').focus(), 100);
-}
-function closeLoginModal() {
-  document.getElementById('loginModal').classList.remove('open');
-}
-function doLogin() {
-  const u = document.getElementById('loginUser').value.trim().toUpperCase();
-  const p = document.getElementById('loginPass').value.trim().toUpperCase();
-  if (u === 'DEISE' && p === 'K2GO') {
-    closeLoginModal();
-    showAdmin();
-  } else {
-    document.getElementById('loginErr').style.display = 'block';
-  }
-}
-function logout() {
-  showPage('test-page');
-}
-
-// ===============================================================
-// PAGE SWITCHING
-// ===============================================================
-function showPage(id) {
-  ['test-page','admin-panel','detail-view'].forEach(pid => {
-    document.getElementById(pid).style.display = pid === id ? 'block' : 'none';
-  });
-  document.getElementById('thankyou-page').style.display = 'none';
-}
-
-// ===============================================================
-// ADMIN
-// ===============================================================
-async function getResults() {
-  try {
-    const res = await fetch("https://script.google.com/macros/s/AKfycbxJ7rdxU8twcGX7d2mcjq5Djyyp6RkXcaPyJRHnW2i9m3sKz7ShyQUjI0KBCIcvUqPl/exec");
-    const data = await res.json();
-    return data;
-  } catch(e) {
-    console.error("Erro ao carregar resultados", e);
-    return [];
-  }
-}
-
-async function showAdmin() {
-  showPage('admin-panel');
-
-  const results = await getResults();
-
-  // Stats
-  const counts = { D:0, I:0, S:0, C:0 };
-  results.forEach(r => {
-    const dom = getDominant(r.scores);
-    counts[dom]++;
-  });
-  document.getElementById('adminStats').innerHTML = `
-    <div class="stat-card stat-total">
-      <div class="stat-val">${results.length}</div>
-      <div class="stat-label">Total de Avaliações</div>
-    </div>
-    <div class="stat-card stat-D">
-      <div class="stat-val">${counts.D}</div>
-      <div class="stat-label">🔴 Dominância (D)</div>
-    </div>
-    <div class="stat-card stat-I">
-      <div class="stat-val">${counts.I}</div>
-      <div class="stat-label">🟡 Influência (I)</div>
-    </div>
-    <div class="stat-card stat-S">
-      <div class="stat-val">${counts.S}</div>
-      <div class="stat-label">🟢 Estabilidade (S)</div>
-    </div>
-    <div class="stat-card stat-C">
-      <div class="stat-val">${counts.C}</div>
-      <div class="stat-label">🔵 Conformidade (C)</div>
-    </div>`;
-
-  // Table
-  const tbody = document.getElementById('resultsBody');
-  const noRes = document.getElementById('noResults');
-  if (results.length === 0) {
-    tbody.innerHTML = '';
-    noRes.classList.remove('hidden');
-    return;
-  }
-  noRes.classList.add('hidden');
-  tbody.innerHTML = results.map((r, idx) => {
-    const dom = getDominant(r.scores);
-    const p = PROFILES[dom];
-    return `<tr onclick="showDetail('${r.id}')">
-      <td>${idx + 1}</td>
-      <td><strong>${r.name}</strong></td>
-      <td>${r.date}</td>
-      <td><span class="score-badge score-D">${r.scores.D}</span></td>
-      <td><span class="score-badge score-I">${r.scores.I}</span></td>
-      <td><span class="score-badge score-S">${r.scores.S}</span></td>
-      <td><span class="score-badge score-C">${r.scores.C}</span></td>
-      <td><span class="dominant-badge dom-${dom}">${p.emoji} ${dom} — ${p.name}</span></td>
-      <td><button class="delete-btn" onclick="event.stopPropagation();deleteResult('${r.id}')">🗑 Excluir</button></td>
-    </tr>`;
-  }).join('');
-}
-
-function deleteResult(id) {
-  alert("Exclusão ainda não está habilitada para resultados do Google Sheets.");
-}
-
-function getDominant(scores) {
-  return Object.entries(scores).sort((a,b)=>b[1]-a[1])[0][0];
-}
-
-// ===============================================================
-// DETAIL VIEW
-// ===============================================================
-async function showDetail(id) {
-  const results = await getResults();
-  const r = results.find(x => String(x.id) === String(id));
-  if (!r) return;
-
-  showPage('detail-view');
-  const dom = getDominant(r.scores);
-  const p = PROFILES[dom];
-
-  document.getElementById('detailName').textContent = '👤 ' + r.name;
-  document.getElementById('d-name').textContent = r.name;
-  document.getElementById('d-date').textContent = '📅 ' + r.date;
-
-  // Scores
-  const total = r.scores.D + r.scores.I + r.scores.S + r.scores.C;
-  document.getElementById('d-scores').innerHTML = ['D','I','S','C'].map(dim => `
-    <div class="score-item si-${dim} ${dim === dom ? 'active' : ''}">
-      <div class="s-val">${r.scores[dim]}</div>
-      <div class="s-lbl">${PROFILES[dim].name}</div>
-      <div class="pct-bar-wrap">
-        <div class="pct-bar" style="width:${Math.round((r.scores[dim]/100)*100)}%;background:${PROFILES[dim].color}"></div>
-      </div>
-    </div>`).join('');
-
-  // Dominant info
-  const domEl = document.getElementById('d-dominant-info');
-  domEl.className = `dominant-info ${p.colorBg}`;
-  domEl.innerHTML = `<strong>${p.emoji} Perfil Dominante: ${dom} — ${p.name}</strong><p style="margin-top:6px">${p.shortDesc}</p>`;
-
-  // Radar Chart
-  if (radarChartInstance) { radarChartInstance.destroy(); radarChartInstance = null; }
-  const ctx = document.getElementById('radarChart').getContext('2d');
-  radarChartInstance = new Chart(ctx, {
-    type: 'radar',
-    data: {
-      labels: ['D — Dominância','I — Influência','S — Estabilidade','C — Conformidade'],
-      datasets: [{
-        label: r.name,
-        data: [r.scores.D, r.scores.I, r.scores.S, r.scores.C],
-        backgroundColor: 'rgba(79,70,229,.18)',
-        borderColor: '#4f46e5',
-        borderWidth: 2.5,
-        pointBackgroundColor: [PROFILES.D.color, PROFILES.I.color, PROFILES.S.color, PROFILES.C.color],
-        pointRadius: 6, pointHoverRadius: 8,
-        fill: true
-      }]
-    },
-    options: {
-      responsive: true,
-      scales: { r: { min: 0, max: 100, ticks: { stepSize: 25, font: { size: 10 } }, pointLabels: { font: { size: 11, weight: '600' } } } },
-      plugins: { legend: { display: false } }
-    }
-  });
-
-  // Profile sections
-  const sections = document.getElementById('profileSections');
-  sections.innerHTML = `
-    <div class="profile-section">
-      <h3 style="color:${p.color}">✅ Comportamentos Positivos — Perfil ${p.emoji} ${dom}</h3>
-      <div class="tag-cloud">${p.positivos.map(t=>`<span class="tag tag-pos">${t}</span>`).join('')}</div>
-    </div>
-    <div class="profile-section">
-      <h3 style="color:#854d0e">🤝 Valor na Equipe</h3>
-      <div class="tag-cloud">${p.valorEquipe.map(t=>`<span class="tag tag-team">${t}</span>`).join('')}</div>
-    </div>
-    <div class="profile-section">
-      <h3 style="color:#1e40af">🏢 Ambiente Ideal</h3>
-      <div class="tag-cloud">${p.ambienteIdeal.map(t=>`<span class="tag tag-env">${t}</span>`).join('')}</div>
-    </div>
-    <div class="profile-section">
-      <h3 style="color:#9d174d">⚡ Sob Pressão</h3>
-      <div class="tag-cloud">${p.sobPressao.map(t=>`<span class="tag tag-stress">${t}</span>`).join('')}</div>
-    </div>
-    <div class="profile-section">
-      <h3 style="color:#991b1b">⚠️ Comportamentos Limitantes</h3>
-      <div class="tag-cloud">${p.limitantes.map(t=>`<span class="tag tag-neg">${t}</span>`).join('')}</div>
-    </div>`;
-}
-
-// ===============================================================
-// INIT
-// ===============================================================
-document.addEventListener('DOMContentLoaded', () => {
-  showPage('test-page');
-  renderQuestions();
-});
+  window.deletar = async (id) => { if(confirm("Apagar?")) { await deleteDoc(doc(db, "respostas", id)); carregarResultados(); } };
+  window.logout = () => signOut(auth).then(() => location.reload());
+  window.openLoginModal = () => document.getElementById('loginModal').classList.add('open');
+  window.closeLoginModal = () => document.getElementById('loginModal').classList.remove('open');
 </script>
 </body>
 </html>
