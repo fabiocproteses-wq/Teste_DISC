@@ -654,9 +654,20 @@ function submitTest() {
     date: now.toLocaleDateString('pt-BR') + ' ' + now.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}),
     scores: scores
   };
-  const results = getResults();
-  results.push(record);
-  localStorage.setItem('disc_results', JSON.stringify(results));
+  fetch("https://script.google.com/macros/s/AKfycbxJ7rdxU8twcGX7d2mcjq5Djyyp6RkXcaPyJRHnW2i9m3sKz7ShyQUjI0KBCIcvUqPl/exec", {
+  method: "POST",
+  body: JSON.stringify(record),
+  headers: {
+    "Content-Type": "application/json"
+  }
+})
+.then(res => res.json())
+.then(data => {
+  console.log("Salvo:", data);
+})
+.catch(err => {
+  console.error("Erro ao salvar", err);
+});
 
   // Show thank you
   showThankyou();
@@ -699,7 +710,7 @@ function closeLoginModal() {
 function doLogin() {
   const u = document.getElementById('loginUser').value.trim().toUpperCase();
   const p = document.getElementById('loginPass').value.trim().toUpperCase();
-  if (u === 'ADMIN' && p === 'ADMIN') {
+  if (u === 'DEISE' && p === 'K2GO') {
     closeLoginModal();
     showAdmin();
   } else {
@@ -723,14 +734,24 @@ function showPage(id) {
 // ===============================================================
 // ADMIN
 // ===============================================================
-function getResults() {
-  try { return JSON.parse(localStorage.getItem('disc_results')) || []; }
-  catch(e) { return []; }
+async function getResults() {
+  try {
+    const res = await fetch("https://script.google.com/macros/s/AKfycbxJ7rdxU8twcGX7d2mcjq5Djyyp6RkXcaPyJRHnW2i9m3sKz7ShyQUjI0KBCIcvUqPl/exec");
+    const data = await res.json();
+    return data;
+  } catch(e) {
+    console.error("Erro ao carregar resultados", e);
+    return [];
+  }
 }
 
-function showAdmin() {
+async function showAdmin() {
   showPage('admin-panel');
-  const results = getResults();
+
+  const results = await getResults();
+
+  renderResults(results);
+}
 
   // Stats
   const counts = { D:0, I:0, S:0, C:0 };
